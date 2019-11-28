@@ -16,7 +16,8 @@ jobs:
 
     - name: Docker build
       run: |
-        IMAGE_NAME="quay.io/fbenoit/runtime-plugin-java"
+        echo ::set-env name=IMAGE_NAME::"quay.io/fbenoit/runtime-plugin-java"
+        echo "Building image ${IMAGE_NAME}"
         docker build -t ${IMAGE_NAME} .
 
     - name: Docker publish
