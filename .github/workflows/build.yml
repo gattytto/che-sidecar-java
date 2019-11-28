@@ -18,7 +18,7 @@ jobs:
       run: |
         docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" quay.io
         docker build -t runtime-java .
-        docker push florentbenoit/runtime-plugin-java
+        docker push quay.io/fbenoit/runtime-plugin-java
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
