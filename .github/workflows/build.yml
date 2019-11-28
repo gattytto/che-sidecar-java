@@ -1,0 +1,24 @@
+name: Build and push container
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+
+    - name: Docker build
+      run: |
+        docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+        docker build -t runtime-java .
+        docker push florentbenoit/runtime-plugin-java
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
