@@ -24,7 +24,7 @@ jobs:
     - name: Docker publish
       run: |
         docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" quay.io
-        GIT_BRANCH=$(git ls-remote --heads origin | grep $(git rev-parse HEAD) | cut -d / -f 3)
+        GIT_BRANCH=$(echo "${GITHUB_REF}" | cut -d / -f 3)
         echo "GIT_BRANCH is ${GIT_BRANCH} and GITHUB_REF is ${GITHUB_REF}"
         GIT_TAG="latest"
         if [[ "$GIT_BRANCH" != "master" ]]; then
