@@ -25,18 +25,17 @@ jobs:
       run: |
         docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" quay.io
         GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-        if [[ "$GIT_BRANCH" == "master" ]]; then
-          GIT_TAG="latest"
-        else
+        GIT_TAG="latest"
+        if [[ "$GIT_BRANCH" != "master" ]]; then
           GIT_TAG=${GIT_BRANCH}
         fi
         # Publish with tag name
         docker tag "${IMAGE_NAME}" "${IMAGE_NAME}:${GIT_TAG}"
-        docker push "${IMAGE_NAME}:${GIT_TAG}
+        docker push "${IMAGE_NAME}:${GIT_TAG}"
         # and with specific sha-1
         SHORT_SHA1=$(git rev-parse --short HEAD)
         docker tag "${IMAGE_NAME}" "${IMAGE_NAME}:${SHORT_SHA1}"
-        docker push "${IMAGE_NAME}:${SHORT_SHA1}
+        docker push "${IMAGE_NAME}:${SHORT_SHA1}"
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
