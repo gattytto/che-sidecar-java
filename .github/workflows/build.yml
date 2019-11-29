@@ -9,7 +9,10 @@
 
 name: Build and push container
 
-on: [push]
+on:
+  push:
+    branches:    
+      - '11'         # Push events on master branch
 
 jobs:
   build:
