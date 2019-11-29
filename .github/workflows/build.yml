@@ -12,7 +12,7 @@ name: Build and push container
 on:
   push:
     branches:    
-      - '11'         # Push events on master branch
+      - '11'
 
 jobs:
   build:
