@@ -7,7 +7,7 @@
 # SPDX-License-Identifier: EPL-2.0
 #
 
-name: Build and push container
+name: PR check
 
 on:
   pull_request:
