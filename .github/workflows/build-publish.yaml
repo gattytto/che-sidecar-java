@@ -17,7 +17,7 @@ on:
 jobs:
   build:
     env:
-      IMAGE_NAME: quay.io/fbenoit/runtime-plugin-java
+      IMAGE_NAME: quay.io/eclipse/che-sidecar-java
 
     runs-on: ubuntu-latest
 
@@ -47,10 +47,10 @@ jobs:
         docker tag "${IMAGE_NAME}" "${IMAGE_NAME}:${GIT_TAG}"
         docker push "${IMAGE_NAME}:${GIT_TAG}"
         # and with specific sha-1
-        echo "Publishing image ${IMAGE_NAME}:${SHORT_SHA1}"
+        echo "Publishing image ${IMAGE_NAME}:${GIT_TAG}-${SHORT_SHA1}"
         SHORT_SHA1=$(git rev-parse --short HEAD)
-        docker tag "${IMAGE_NAME}" "${IMAGE_NAME}:${SHORT_SHA1}"
-        docker push "${IMAGE_NAME}:${SHORT_SHA1}"
+        docker tag "${IMAGE_NAME}" "${IMAGE_NAME}:${GIT_TAG}-${SHORT_SHA1}"
+        docker push "${IMAGE_NAME}:${GIT_TAG}-${SHORT_SHA1}"
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
