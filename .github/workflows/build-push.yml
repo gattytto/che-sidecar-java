@@ -10,7 +10,10 @@
 name: Build and push container
 
 on:
-  [push]:
+  push:
+    branches:
+      - '*'
+      - '!master'
 
 jobs:
   build:
