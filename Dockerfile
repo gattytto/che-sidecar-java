@@ -11,6 +11,39 @@
 FROM alpine:3.10.3
 
 ENV HOME=/home/theia
+ENV GRADLE_HOME /opt/gradle
+ENV GRADLE_VERSION 6.6.1
+
+ARG GRADLE_DOWNLOAD_SHA256=7873ed5287f47ca03549ab8dcb6dc877ac7f0e3d7b1eb12685161d10080910ac
+
+RUN set -o errexit -o nounset \
+	&& echo "Installing dependencies" \
+	&& apk add --no-cache \
+		bash \
+		libstdc++ \
+	\
+	&& echo "Installing build dependencies" \
+	&& apk add --no-cache --virtual .build-deps \
+		ca-certificates \
+		openssl \
+		unzip \
+	\
+	&& echo "Downloading Gradle" \
+	&& wget -O gradle.zip "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" \
+	\
+	&& echo "Checking download hash" \
+	&& echo "${GRADLE_DOWNLOAD_SHA256} *gradle.zip" | sha256sum -c - \
+	\
+	&& echo "Installing Gradle" \
+	&& unzip gradle.zip \
+	&& rm gradle.zip \
+	&& mkdir /opt \
+	&& mv "gradle-${GRADLE_VERSION}" "${GRADLE_HOME}/" \
+	&& ln -s "${GRADLE_HOME}/bin/gradle" /usr/bin/gradle \
+	\
+	&& apk del .build-deps \
+	\
+	&& mkdir ${HOME}/.gradle 
 
 RUN mkdir /projects ${HOME} && \
     # Change permissions to let any arbitrary user
