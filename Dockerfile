@@ -40,7 +40,7 @@ RUN set -o errexit -o nounset \
 	&& mv "gradle-${GRADLE_VERSION}" "${GRADLE_HOME}/" \
 	&& ln -s "${GRADLE_HOME}/bin/gradle" /usr/bin/gradle \
 	\
-	&& apk del .build-deps \
+	&& apk del .build-deps 
 	
 
 
