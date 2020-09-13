@@ -41,10 +41,10 @@ RUN set -o errexit -o nounset \
 	&& ln -s "${GRADLE_HOME}/bin/gradle" /usr/bin/gradle \
 	\
 	&& apk del .build-deps \
-	\
-	&& mkdir -p ${HOME}/.gradle 
+	
 
-RUN mkdir /projects ${HOME} && \
+
+RUN mkdir /projects ${HOME} ${HOME}/.gradle && \
     # Change permissions to let any arbitrary user
     for f in "${HOME}" "/etc/passwd" "/projects"; do \
       echo "Changing permissions on ${f}" && chgrp -R 0 ${f} && \
