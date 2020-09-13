@@ -8,7 +8,7 @@
 # Contributors:
 #   Red Hat, Inc. - initial API and implementation
 
-FROM alpine:3.10.3
+FROM alpine:3.12
 
 ENV HOME=/home/theia
 ENV GRADLE_HOME /opt/gradle
@@ -42,7 +42,7 @@ RUN set -o errexit -o nounset \
 	\
 	&& apk del .build-deps \
 	\
-	&& mkdir ${HOME}/.gradle 
+	&& mkdir -p ${HOME}/.gradle 
 
 RUN mkdir /projects ${HOME} && \
     # Change permissions to let any arbitrary user
