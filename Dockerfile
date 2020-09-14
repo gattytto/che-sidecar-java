@@ -46,7 +46,7 @@ RUN set -o errexit -o nounset \
 
 RUN mkdir /projects ${HOME} ${HOME}/.gradle && \
     # Change permissions to let any arbitrary user
-    for f in "${HOME}" "/etc/passwd" "/projects"; do \
+    for f in "${HOME}" "/etc/passwd" "/projects" "/opt"; do \
       echo "Changing permissions on ${f}" && chgrp -R 0 ${f} && \
       chmod -R g+rwX ${f}; \
     done
