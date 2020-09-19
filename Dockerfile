@@ -40,7 +40,10 @@ RUN set -o errexit -o nounset \
 	&& mv "gradle-${GRADLE_VERSION}" "${GRADLE_HOME}/" \
 	&& ln -s "${GRADLE_HOME}/bin/gradle" /usr/bin/gradle \
 	\
-	&& apk del .build-deps 
+	&& apk del .build-deps && \
+	wget https://github.com/JetBrains/kotlin/releases/download/v1.4.10/kotlin-compiler-1.4.10.zip && \
+	unzip kotlin-compiler-1.4.10.zip && cp kotlin/bin/* /usr/bin/ && cp kotlin/lib/* /usr/lib/ &&\
+	rm -rf kotlin-compiler-1.4.10.zip kotlinc
 	
 
 
