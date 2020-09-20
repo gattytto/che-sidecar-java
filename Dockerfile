@@ -42,7 +42,7 @@ RUN set -o errexit -o nounset \
 	\
 	&& apk del .build-deps && \
 	wget https://github.com/JetBrains/kotlin/releases/download/v1.4.10/kotlin-compiler-1.4.10.zip && \
-	unzip kotlin-compiler-1.4.10.zip && cp kotlinc/bin/* /usr/bin/ && cp kotlinc/lib/* /usr/lib/ &&\
+	unzip kotlin-compiler-1.4.10.zip && cp kotlinc/bin/* /usr/bin/ && cp kotlinc/lib/* /opt/gradle/lib/ &&\
 	rm -rf kotlin-compiler-1.4.10.zip kotlinc
 	
 
