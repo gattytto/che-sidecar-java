@@ -41,6 +41,8 @@ RUN set -o errexit -o nounset \
 	&& ln -s "${GRADLE_HOME}/bin/gradle" /usr/bin/gradle \
 	\
 	&& apk del .build-deps && \
+	#TODO: ADD https://github.com/fwcd/kotlin-language-server/releases language-server
+	#TODO: ADD https://github.com/fwcd/kotlin-debug-adapter/releases debug-adapter
 	wget https://github.com/JetBrains/kotlin/releases/download/v1.4.10/kotlin-compiler-1.4.10.zip && \
 	unzip kotlin-compiler-1.4.10.zip && cp kotlinc/bin/* /usr/bin/ && cp kotlinc/lib/* /opt/gradle/lib/ &&\
 	rm -rf kotlin-compiler-1.4.10.zip kotlinc
